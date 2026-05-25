@@ -39,18 +39,13 @@ const Carousel = ({ items, isLoading }) => {
         arrows: true 
     };
 
-    // const handleClick = (event, item) => {
-    //     const clickedId = item?.nftId;
-    //     console.log(clickedId);
-    // };
-
     return (
         <Slider {...sliderSettings} >
             {items.map(item => (
                 <div className="carousel-item" key={item.id}>
                     <div className="card">
                         <div className="card-body">
-                            <Link to={`/item-details/${item.nftId}`}>
+                            <Link to={`/item-details/${item.nftId}`} key={item.nftId} >
                                 <img src={item.nftImage} className="slide-img" alt="" />
                             </Link>
                         </div>

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
 import axios from 'axios';
-import AuthorImage from "../images/author_thumbnail.jpg";
-import nftImage from "../images/nftImage.jpg";
 
 const ItemDetails = () => {
 
@@ -16,8 +14,9 @@ const ItemDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+      console.log(nftId)
       try {
-        const response = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/item-details/${nftId}`);
+        const response = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/item-details?id=${nftId}`);
         setItem(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -28,12 +27,11 @@ const ItemDetails = () => {
     fetchData()
   }, [nftId])
 
+
   if (loading) {
     return <div>Loading...</div>
   }
   if (!item) return <div>No item found!</div>
-
-
 
   return (
     <div id="wrapper" key={item.nftId}>
