@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import Carousel from "../UI/HotCollectionsCarousel";
 import axios from 'axios';
-import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
-  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [authors, setAuthors] = useState([]);
 
@@ -20,17 +17,10 @@ const HotCollections = () => {
       setLoading(false);
     }
   }
-  
+
   useEffect (() => {
     fetchCardData();
   }, [])
-
-  // if (loading) {
-  //   return (
-  //     <><Skeleton /> </>
-  //   )
-  // }
-
 
   return (
     <section id="section-collections" className="no-bottom">
