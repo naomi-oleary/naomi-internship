@@ -5,7 +5,10 @@ import Slider from "react-slick";
 const Carousel = ({ items, isLoading }) => {
 
     const [slidesToShow, setSlidesToShow] = useState(4);
-    const cardRef = useRef(null);
+
+    const displayItems = isLoading
+  ? new Array(4).fill({ id: '', nftId: '', nftImage: '', authorImage: '', title: '', code: '' })
+  : items;
 
     useEffect(() => {
         const updateSlidesToShow = () => {
@@ -27,16 +30,6 @@ const Carousel = ({ items, isLoading }) => {
         }
     }, [])
 
-    useEffect(() => {
-        if (cardRef.current) {
-            if (isLoading) {
-                cardRef.current.classList.add('skeleton-box');
-            } else {
-                cardRef.current.classList.remove('skeleton-box')
-            }
-        }
-    }, [isLoading]);
-
     const sliderSettings = {
         dots: false, 
         infinite: true,
@@ -48,9 +41,9 @@ const Carousel = ({ items, isLoading }) => {
 
     return (
             <Slider {...sliderSettings} >
-                {items.map(item => (
-                    <div className="carousel-item" key={item.id}>
-                        <div className="card" ref={cardRef}>
+                {displayItems.map((item, index) => (
+                    <div className="carousel-item" key={index}>
+                        <div className={`card ${isLoading ? 'skeleton-box' : ''}`} >
                             <div className="card-body">
                                 <Link to={`/item-details/${item.nftId}`} key={item.nftId} >
                                     <img src={item.nftImage} className="slide-img" alt="" />
