@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
 const Carousel = ({ items, isLoading }) => {
 
     const [slidesToShow, setSlidesToShow] = useState(4);
+    const cardRef = useRef(null);
 
     useEffect(() => {
         const updateSlidesToShow = () => {
@@ -17,21 +18,27 @@ const Carousel = ({ items, isLoading }) => {
                 setSlidesToShow(4)
             }
         }
-
-        updateSlidesToShow();
-
+        
         window.addEventListener('resize', updateSlidesToShow);
+        updateSlidesToShow();
 
         return () => {
             window.removeEventListener('resize', updateSlidesToShow)
         }
     }, [])
 
-    if (isLoading) return <p>Loading...</p>;
-    if (!items) return <p>No data found.</p>
+    useEffect(() => {
+        if (cardRef.current) {
+            if (isLoading) {
+                cardRef.current.classList.add('skeleton-box');
+            } else {
+                cardRef.current.classList.remove('skeleton-box')
+            }
+        }
+    }, [isLoading]);
 
     const sliderSettings = {
-        dots: false,
+        dots: false, 
         infinite: true,
         speed: 500,
         slidesToShow: slidesToShow,
@@ -40,31 +47,31 @@ const Carousel = ({ items, isLoading }) => {
     };
 
     return (
-        <Slider {...sliderSettings} >
-            {items.map(item => (
-                <div className="carousel-item" key={item.id}>
-                    <div className="card">
-                        <div className="card-body">
-                            <Link to={`/item-details/${item.nftId}`} key={item.nftId} >
-                                <img src={item.nftImage} className="slide-img" alt="" />
-                            </Link>
-                        </div>
-                        <div className="avatar">
-                            <Link to={`/authors`}>
-                                <img className="avatar--img" src={item.authorImage} alt="" />
-                            </Link>
-                            <i className="fa fa-check"></i>
-                        </div>
-                        <div className="card-info">
-                            <Link to="/explore">
-                                <h4>{item.title}</h4>
-                            </Link>
-                            <span>ERC-{item.code}</span>
+            <Slider {...sliderSettings} >
+                {items.map(item => (
+                    <div className="carousel-item" key={item.id}>
+                        <div className="card" ref={cardRef}>
+                            <div className="card-body">
+                                <Link to={`/item-details/${item.nftId}`} key={item.nftId} >
+                                    <img src={item.nftImage} className="slide-img" alt="" />
+                                </Link>
+                            </div>
+                            <div className="avatar">
+                                <Link to={`/authors`}>
+                                    <img className="avatar--img" src={item.authorImage} alt="" />
+                                </Link>
+                                <i className="fa fa-check"></i>
+                            </div>
+                            <div className="card-info">
+                                <Link to="/explore">
+                                    <h4>{item.title}</h4>
+                                </Link>
+                                <span>ERC-{item.code}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-        ))}
-    </Slider>
+            ))}
+            </Slider>
     )
   }
 

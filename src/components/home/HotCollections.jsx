@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Carousel from "../UI/HotCollectionsCarousel";
 import axios from 'axios';
+import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
   const { id } = useParams();
@@ -24,9 +25,11 @@ const HotCollections = () => {
     fetchCardData();
   }, [])
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
+  // if (loading) {
+  //   return (
+  //     <><Skeleton /> </>
+  //   )
+  // }
 
 
   return (
