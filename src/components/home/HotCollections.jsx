@@ -9,7 +9,6 @@ const HotCollections = () => {
   const fetchCardData = async () => {
     try {
       const cardData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`)
-      console.log(cardData);
       setAuthors(cardData.data)
       setLoading(false);
     } catch (error) {
