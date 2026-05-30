@@ -5,7 +5,8 @@ import Author from "./pages/Author";
 import ItemDetails from "./pages/ItemDetails";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
-import './css/custom/custom-hotcollections.css'
+import './css/custom/custom-hotcollections.css';
+import './css/custom/custom-newItems.css';
 
 function App() {
   return (
