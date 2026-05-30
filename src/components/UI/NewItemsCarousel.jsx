@@ -55,7 +55,7 @@ const NewItemsCarousel = ({ items, isLoading }) => {
                                 </Link>
                             </div>
 
-                            <NewItemsCountdownTimer item={item} key={item.id}/>
+                            <NewItemsCountdownTimer item={items} key={item.id}/>
 
                             <div className="nft__item_wrap">
                                 <div className="nft__item_extra">
