@@ -8,7 +8,6 @@ const NewItemsCountdownTimer = ({ item, expiryDate }) => {
         minutes: 0,
         seconds: 0,
         isExpired: false,
-
     });
 
     useEffect(() => {
