@@ -42,8 +42,8 @@ const NewItemsCarousel = ({ items, isLoading }) => {
         return (
             <Slider {...sliderSettings} >
                 {displayItems.map((item, index) => (
-                    <div className="nft__card" key={index}>
-                        <div className="nft__item">
+                    <div className={`nft__card ${isLoading ? 'skeleton-box' : ''}`} key={index}>
+                        <div className="nft__item" >
                             <div className="author_list_pp">
                                 <Link
                                 to="/author"
@@ -54,8 +54,10 @@ const NewItemsCarousel = ({ items, isLoading }) => {
                                     <i className="fa fa-check"></i>
                                 </Link>
                             </div>
-
-                            <NewItemsCountdownTimer item={items} key={item.id}/>
+                            
+                            <div className="newItems__countdownTimer">
+                                <NewItemsCountdownTimer item={items} expiryDate={item.expiryDate} key={item.id}/>
+                            </div>
 
                             <div className="nft__item_wrap">
                                 <div className="nft__item_extra">
