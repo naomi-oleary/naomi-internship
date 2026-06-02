@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import './css/custom/custom-hotcollections.css';
 import './css/custom/custom-newItems.css';
+import './css/custom/custom-topSellers.css';
 
 function App() {
   return (

@@ -1,0 +1,46 @@
+/* -------------------------- 
+SKELETON LOADING STATE 
+-------------------------- */
+
+.row.skeleton-box .pp_author,
+.row.skeleton-box .author_list_info a,
+.row.skeleton-box .author_list_info span {
+  display: flex;
+  height: 308px;
+  width: 270px;
+  position: relative;
+  overflow: hidden;
+  background-color: #dddbdd !important;
+  pointer-events: none;
+  color: transparent !important;
+}
+
+.row.skeleton-box .pp_author::after,
+.row.skeleton-box .author_list_info a::after,
+.row.skeleton-box .author_list_info span::after {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  -webkit-animation: shimmer 2s infinite;
+  animation: shimmer 2s infinite;
+  content: "";
+}
+@-webkit-keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
