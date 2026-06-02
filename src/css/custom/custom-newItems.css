@@ -52,3 +52,14 @@ SKELETON LOADING STATE
     transform: translateX(100%);
   }
 }
+
+/*------------------
+RESPONSIVITY
+--------------------*/
+
+@media (max-width: 550px) {
+    .nft__item_wrap {
+        object-fit: cover;
+        overflow: hidden;
+    }
+}
