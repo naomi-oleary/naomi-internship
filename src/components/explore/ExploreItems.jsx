@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import axios from 'axios';
+import NewItemsCountdownTimer from "../UI/NewItemsCountdownTimer";
 
 const ExploreItems = () => {
+  const [loading, setLoading] = useState(true);
+  const [exploreItems, setExploreItems] = useState([]);
+
+  const fetchExploreItems = async () => {
+    try {
+      const exploreItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`);
+      setExploreItems(exploreItemData.data);
+    }
+    catch (error) {
+      console.error("Error fetching card data:", error);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect (() => {
+    fetchExploreItems();
+  }, [])
+
   return (
     <>
       <div>
@@ -14,7 +34,7 @@ const ExploreItems = () => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {new Array(8).fill(0).map((_, index) => (
+      {exploreItems.map((exploreItems, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -23,15 +43,15 @@ const ExploreItems = () => {
           <div className="nft__item">
             <div className="author_list_pp">
               <Link
-                to="/author"
+                to={`/author/${exploreItems.authorId}`}
                 data-bs-toggle="tooltip"
                 data-bs-placement="top"
               >
-                <img className="lazy" src={AuthorImage} alt="" />
+                <img className="lazy" src={exploreItems.authorImage} alt="" />
                 <i className="fa fa-check"></i>
               </Link>
             </div>
-            <div className="de_countdown">5h 30m 32s</div>
+            <NewItemsCountdownTimer item={exploreItems} expiryDate={exploreItems.expiryDate} key={exploreItems.id} />
 
             <div className="nft__item_wrap">
               <div className="nft__item_extra">
@@ -52,17 +72,17 @@ const ExploreItems = () => {
                 </div>
               </div>
               <Link to="/item-details">
-                <img src={nftImage} className="lazy nft__item_preview" alt="" />
+                <img src={exploreItems.nftImage} className="lazy nft__item_preview" alt="" />
               </Link>
             </div>
             <div className="nft__item_info">
               <Link to="/item-details">
-                <h4>Pinky Ocean</h4>
+                <h4>{exploreItems.title}</h4>
               </Link>
-              <div className="nft__item_price">1.74 ETH</div>
+              <div className="nft__item_price">{exploreItems.price}</div>
               <div className="nft__item_like">
                 <i className="fa fa-heart"></i>
-                <span>69</span>
+                <span>{exploreItems.likes}</span>
               </div>
             </div>
           </div>
