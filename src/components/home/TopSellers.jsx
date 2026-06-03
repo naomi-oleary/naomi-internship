@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import AuthorImage from "../../images/author_thumbnail.jpg";
+import Skeleton from "../UI/Skeleton";
 
-const TopSellers = ({ isLoading }) => {
+const TopSellers = ({ index, isLoading }) => {
 
   const [loading, setLoading] = useState(true);
   const [topSellers, setTopSellers] = useState([]);
@@ -41,20 +41,31 @@ const TopSellers = ({ isLoading }) => {
               <div className="col-md-12">
                 <ol className="author_list">
                   {topSellers.map((topSellers, index) => (
-                    <li className={`${isLoading ? 'skeleton-box' : ''}`} key={topSellers.authorId}>
+                    <li key={topSellers.authorId}>
                       <div className="author_list_pp">
                         <Link to="/author">
-                          <img
-                            className="lazy pp-author"
-                            src={topSellers.authorImage}
-                            alt=""
-                          />
+                        {topSellers.authorImage  
+                          ? (<img
+                              className="lazy pp-author"
+                              src={topSellers.authorImage}
+                              alt=""
+                            />)
+                          : (<Skeleton width="50px" height="50px" borderRadius="50%" />)
+                        }
                           <i className="fa fa-check"></i>
                         </Link>
                       </div>
                       <div className="author_list_info">
-                        <Link to={`/author/${topSellers.authorId}`}>{topSellers.authorName}</Link>
-                        <span>{topSellers.price}</span>
+                        <Link to={`/author/${topSellers.authorId}`}>
+                          {topSellers.authorName
+                            ? (<>{topSellers.authorName}</>)
+                            : (<Skeleton width="108px" height="18px"/>)}
+                        </Link>
+                        <span>
+                          {topSellers.price
+                            ? (<>{topSellers.price}</>)
+                            : (<Skeleton width="24px" height="16px"/>)}
+                        </span>
                       </div>
                     </li>
                   ))}
