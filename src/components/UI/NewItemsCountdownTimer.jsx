@@ -38,7 +38,7 @@ const NewItemsCountdownTimer = ({ item, expiryDate }) => {
             return <></>
         }
         if (timeLeft.isExpired) {
-            return <span></span>;
+            return <span>EXPIRED</span>;
         }
     
         return (
