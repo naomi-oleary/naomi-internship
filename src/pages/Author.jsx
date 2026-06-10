@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
+import axios from 'axios';
 
 const Author = () => {
+
+  const [authorItems, setAuthorItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAuthors = async () => {
+    try {
+      const authorItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`)
+      setAuthorItems(authorItemData.data);
+      console.log(authorItemData.data)
+    }
+    catch (error) {
+      console.error("Error fetching author information:", error);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect (() => {
+    fetchAuthors();
+  }, [])
+
   return (
     <div id="wrapper">
-      <div className="no-bottom no-top" id="content">
+      {authorItems.map((authorItems, index) => (
+        <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
         <section
@@ -25,7 +48,7 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={AuthorImage} alt="" />
+                      <img src={authorItems.authorImage} alt="" />
 
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
@@ -55,13 +78,14 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems />
+                  <AuthorItems items={authorItems} key={index} />
                 </div>
               </div>
             </div>
           </div>
         </section>
       </div>
+      ))}
     </div>
   );
 };

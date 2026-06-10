@@ -1,21 +1,40 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from 'axios';
 
-const AuthorItems = ( items ) => {
+const AuthorItems = ( authorItems ) => {
 
+  const [authorItemsById, setAuthorItemsById] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchAuthorsById = async () => {
+    try {
+      const authorItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/${authorItemsById.authorId}`)
+      setAuthorItemsById(authorItemData.data);
+      console.log(authorItemData.data)
+    }
+    catch (error) {
+      console.error("Error fetching author information:", error);
+    }
+    finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect (() => {
+    fetchAuthorsById();
+  }, [])
 
   return (
     <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
-          {new Array(8).fill(0).map((item) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={item.nftId}>
+          {authorItemsById.map((authorItemsById, index) => (
+            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={authorItemsById.id}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link to="">
-                    <img className="lazy" src={item.authorImage} alt="" />
+                    <img className="lazy" src={authorItemsById.authorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
@@ -39,7 +58,7 @@ const AuthorItems = ( items ) => {
                   </div>
                   <Link to="/item-details">
                     <img
-                      src={nftImage}
+                      src={authorItemsById.nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
@@ -47,12 +66,12 @@ const AuthorItems = ( items ) => {
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{authorItemsById.title}</h4>
                   </Link>
-                  <div className="nft__item_price">2.52 ETH</div>
+                  <div className="nft__item_price">{authorItemsById.price}</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>97</span>
+                    <span>{authorItemsById.likes}</span>
                   </div>
                 </div>
               </div>
