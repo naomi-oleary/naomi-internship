@@ -39,7 +39,7 @@ const NewItems = () => {
           {loading ? (
                 <Skeleton width="100px" height="72px" />
               ) : (
-                <NewItemsCarousel className="newItems__carousel" items={newItems} key={newItems.id} expiryDate={newItems.expiryDate} isLoading={loading} />
+                <NewItemsCarousel className="newItems__carousel" items={newItems} key={newItems.id} expiryDate={newItems.expiryDate} loading={loading} />
               )}
         </div>
       </div>

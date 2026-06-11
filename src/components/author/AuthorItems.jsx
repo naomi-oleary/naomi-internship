@@ -18,19 +18,20 @@ const AuthorItems = ( authorItems ) => {
       console.error("Error fetching author information:", error);
     }
     finally {
+      console.log(authorItemsById);
       setLoading(false);
     }
   }
 
   useEffect (() => {
     fetchAuthorsById();
-  }, [])
+  }, [authorItems.authorId])
 
   return (
     <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={authorItemsById.id}>
+            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
               {loading ? (
                 <Skeleton width="100px" height="72px" />
               ) : (

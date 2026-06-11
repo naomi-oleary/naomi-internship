@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
-const Carousel = ({ items, isLoading }) => {
+const Carousel = ({ items, loading }) => {
 
     const [slidesToShow, setSlidesToShow] = useState(4);
 
-    const displayItems = isLoading
+    const displayItems = loading
     ? new Array(4).fill({ id: '', nftId: '', nftImage: '', authorImage: '', title: '', code: '' })
      : items;
 
@@ -43,7 +43,7 @@ const Carousel = ({ items, isLoading }) => {
         <Slider {...sliderSettings} >
             {displayItems.map((items, index) => (
                 <div className="carousel-item" key={index}>
-                    <div className={`card ${isLoading ? 'skeleton-box' : ''}`} >
+                    <div className={`card ${loading ? 'skeleton-box' : ''}`} >
                         <div className="card-body">
                             <Link to={`/item-details/${items.nftId}`} key={items.nftId} >
                                 <img src={items.nftImage} className="slide-img" alt="" />
