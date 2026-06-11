@@ -3,6 +3,7 @@ import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Skeleton from "../components/UI/Skeleton";
 
 const Author = () => {
 
@@ -78,7 +79,11 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  <AuthorItems items={authorItems} key={index} />
+                  {loading ? (
+                    <Skeleton width="100px" height="72px" />
+                  ) : (
+                    <AuthorItems items={authorItems} key={authorItems.id} expiryDate={authorItems.expiryDate} />
+                  )}
                 </div>
               </div>
             </div>
