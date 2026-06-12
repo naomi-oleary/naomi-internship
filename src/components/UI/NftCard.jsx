@@ -7,7 +7,7 @@ const NftCard = ({ items }) => {
     return (
         <div className="nft__item" key={items.id}>
             <div className="author_list_pp">
-                <Link to="/authors">
+                <Link to={`/authors/${items.authorId}`}>
                 <img className="lazy" src={items.authorImage} alt="" />
                 <i className="fa fa-check"></i>
                 </Link>
