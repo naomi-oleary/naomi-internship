@@ -15,8 +15,8 @@ const Author = () => {
   const fetchAuthors = async () => {
     try {
       const authorItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`)
-      setAuthorItems(authorItemData.data);
-      console.log(authorItemData.data)
+      console.log(authorItemData.data.items)
+      setAuthorItems(authorItemData.data.items);
     }
     catch (error) {
       console.error("Error fetching author information:", error);
@@ -30,9 +30,13 @@ const Author = () => {
     fetchAuthors();
   }, [authorId])
 
+  console.log('authorItems state:', authorItems)
   return (
     <div id="wrapper">
-      {authorItems.map((authorItems, index) => (
+      {loading ? (
+        <Skeleton width="100px" height="72px" />
+      ) : (
+      authorItems.length > 0 ? (authorItems.map((item) => (
         <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
@@ -51,14 +55,14 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={authorItems.authorImage} alt="" />
+                      <img src={item.authorImage} alt="" />
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
                         <h4>
-                          {authorItems.authorName}
-                          <span className="profile_username">@{authorItems.tag}</span>
+                          {item.authorName}
+                          <span className="profile_username">@{item.tag}</span>
                           <span id="wallet" className="profile_wallet">
-                            {authorItems.address}
+                            {item.address}
                           </span>
                           <button id="btn_copy" title="Copy Text">
                             Copy
@@ -69,7 +73,7 @@ const Author = () => {
                   </div>
                   <div className="profile_follow de-flex">
                     <div className="de-flex-col">
-                      <div className="profile_follower">{authorItems.followers} followers</div>
+                      <div className="profile_follower">{item.followers} followers</div>
                       <Link to="#" className="btn-main">
                         Follow
                       </Link>
@@ -80,17 +84,16 @@ const Author = () => {
 
               <div className="col-md-12">
                 <div className="de_tab tab_simple">
-                  {loading ? (
-                    <Skeleton width="100px" height="72px" />
-                  ) : (
                     <AuthorItems items={authorItems} key={authorItems.id} expiryDate={authorItems.expiryDate} loading={loading} />
-                  )}
                 </div>
               </div>
             </div>
           </div>
         </section>
-      </div> ))}
+      </div> 
+      ))) : (
+        <p>No author items found.</p>
+      ))}
     </div>
   );
 };

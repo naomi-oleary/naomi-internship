@@ -50,7 +50,7 @@ const Carousel = ({ items, loading }) => {
                             </Link>
                         </div>
                         <div className="avatar">
-                            <Link to={`/authors`}>
+                            <Link to={`/author/${items.authorId}`}>
                                 <img className="avatar--img" src={items.authorImage} alt="" />
                             </Link>
                             <i className="fa fa-check"></i>
