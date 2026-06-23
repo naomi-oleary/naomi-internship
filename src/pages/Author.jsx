@@ -9,14 +9,13 @@ const Author = () => {
 
   const { authorId } = useParams();
 
-  const [authorItems, setAuthorItems] = useState([]);
+  const [authorItems, setAuthorItems] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchAuthors = async () => {
     try {
       const authorItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`)
-      console.log(authorItemData.data.items)
-      setAuthorItems(authorItemData.data.items);
+      setAuthorItems(Object.values(authorItemData));
     }
     catch (error) {
       console.error("Error fetching author information:", error);
@@ -30,13 +29,10 @@ const Author = () => {
     fetchAuthors();
   }, [authorId])
 
-  console.log('authorItems state:', authorItems)
+  console.log('type: ', authorItems)
+
   return (
     <div id="wrapper">
-      {loading ? (
-        <Skeleton width="100px" height="72px" />
-      ) : (
-      authorItems.length > 0 ? (authorItems.map((item) => (
         <div className="no-bottom no-top" id="content">
         <div id="top"></div>
 
@@ -46,54 +42,60 @@ const Author = () => {
           className="text-light"
           data-bgimage="url(images/author_banner.jpg) top"
           style={{ background: `url(${AuthorBanner}) top` }}
-        ></section>
+          ></section>
 
         <section aria-label="section">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <div className="d_profile de-flex">
-                  <div className="de-flex-col">
-                    <div className="profile_avatar">
-                      <img src={item.authorImage} alt="" />
-                      <i className="fa fa-check"></i>
-                      <div className="profile_name">
-                        <h4>
-                          {item.authorName}
-                          <span className="profile_username">@{item.tag}</span>
-                          <span id="wallet" className="profile_wallet">
-                            {item.address}
-                          </span>
-                          <button id="btn_copy" title="Copy Text">
-                            Copy
-                          </button>
-                        </h4>
+                { loading ? (
+                  <Skeleton width="200px" height="42px" />
+                ) : (authorItems.map((authorItems, index) => (
+                  <div className="d_profile de-flex" key={index} >
+                    <div className="de-flex-col">
+                      <div className="profile_avatar">
+                        <img src={authorItems.authorImage} alt="" />
+                        <i className="fa fa-check"></i>
+                        <div className="profile_name">
+                          <h4>
+                            {authorItems.authorName}
+                            <span className="profile_username">@{authorItems.tag}</span>
+                            <span id="wallet" className="profile_wallet">
+                              {authorItems.address}
+                            </span>
+                            <button id="btn_copy" title="Copy Text">
+                              Copy
+                            </button>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="profile_follow de-flex">
+                      <div className="de-flex-col">
+                        <div className="profile_follower">{authorItems.followers} followers</div>
+                        <Link to="#" className="btn-main">
+                          Follow
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  <div className="profile_follow de-flex">
-                    <div className="de-flex-col">
-                      <div className="profile_follower">{item.followers} followers</div>
-                      <Link to="#" className="btn-main">
-                        Follow
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                )))}
               </div>
 
-              <div className="col-md-12">
-                <div className="de_tab tab_simple">
-                    <AuthorItems items={authorItems} key={authorItems.id} expiryDate={authorItems.expiryDate} loading={loading} />
-                </div>
-              </div>
+              {loading ? (
+                <Skeleton width="116px" height="24px" />
+              ) : (authorItems.nftCollection.map((nftCollection) => 
+                (<div className="col-md-12">
+                  <div className="de_tab tab_simple" key={nftCollection.id}>
+                      <AuthorItems items={authorItems.nftCollection} key={authorItems.nftCollection.id} loading={loading} />
+                  </div>
+                </div>)
+              ))}
+
             </div>
           </div>
         </section>
       </div> 
-      ))) : (
-        <p>No author items found.</p>
-      ))}
     </div>
   );
 };
