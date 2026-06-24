@@ -13,7 +13,7 @@ const AuthorItems = ( items, loading ) => {
               {loading ? (
                 <Skeleton width="100px" height="72px" />
               ) : (
-                <NftCard items={items} key={items.id} expiryDate={items.expiryDate} />
+                <NftCard items={items} key={items.nftId} expiryDate={items.expiryDate} />
               )}
             </div>
         </div>

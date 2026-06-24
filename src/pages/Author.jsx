@@ -8,14 +8,13 @@ import Skeleton from "../components/UI/Skeleton";
 const Author = () => {
 
   const { authorId } = useParams();
-
   const [authorItems, setAuthorItems] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchAuthors = async () => {
     try {
       const authorItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`)
-      setAuthorItems(Object.values(authorItemData));
+      setAuthorItems(authorItemData.data);
     }
     catch (error) {
       console.error("Error fetching author information:", error);
@@ -29,7 +28,7 @@ const Author = () => {
     fetchAuthors();
   }, [authorId])
 
-  console.log('type: ', authorItems)
+  console.log(authorItems.nftCollection)
 
   return (
     <div id="wrapper">
@@ -50,8 +49,8 @@ const Author = () => {
               <div className="col-md-12">
                 { loading ? (
                   <Skeleton width="200px" height="42px" />
-                ) : (authorItems.map((authorItems, index) => (
-                  <div className="d_profile de-flex" key={index} >
+                ) : 
+                  (<div className="d_profile de-flex" key={authorItems.id} >
                     <div className="de-flex-col">
                       <div className="profile_avatar">
                         <img src={authorItems.authorImage} alt="" />
@@ -79,18 +78,23 @@ const Author = () => {
                       </div>
                     </div>
                   </div>
-                )))}
+                )}
               </div>
 
-              {loading ? (
-                <Skeleton width="116px" height="24px" />
-              ) : (authorItems.nftCollection.map((nftCollection) => 
-                (<div className="col-md-12">
-                  <div className="de_tab tab_simple" key={nftCollection.id}>
-                      <AuthorItems items={authorItems.nftCollection} key={authorItems.nftCollection.id} loading={loading} />
-                  </div>
-                </div>)
-              ))}
+              <div className="col-md-12">
+                {loading ? (
+                  <Skeleton width="116px" height="24px" />
+                ) : (
+                authorItems.nftCollection && authorItems.nftCollection.length > 0 ? (
+                  authorItems.nftCollection.map((nft) => (
+                    <div className="de_tab tab_simple" key={nft.id}>
+                        <AuthorItems items={nft} loading={loading} />
+                    </div>
+                  ))) : (
+                  <div> none found </div>
+                  )
+                )}
+              </div>
 
             </div>
           </div>
