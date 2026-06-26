@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NewItemsCountdownTimer from "./NewItemsCountdownTimer";
 
-const NftCard = ({ items }) => {
+const NftCard = ({ items, authorImage }) => {
     
     return (
         <div className="nft__item" key={items.id}>
             <div className="author_list_pp">
                 <Link to={`/author/${items.authorId}`}>
-                <img className="lazy" src={items.authorImage} alt="" />
+                <img className="lazy" src={authorImage} alt="" />
                 <i className="fa fa-check"></i>
                 </Link>
             </div>
             <div className="newItems__countdownTimer">
-                <NewItemsCountdownTimer expiryDate={items.expiryDate} />
+                {items.expiryDate ? (
+                    <NewItemsCountdownTimer expiryDate={items.expiryDate} />
+                ) : (
+                    <span></span>
+                )}
             </div>
             <div className="nft__item_wrap">
                 <div className="nft__item_extra">

@@ -1,0 +1,4 @@
+.author__nftCard--container {
+    display: flex;
+    flex-wrap: wrap;
+}
