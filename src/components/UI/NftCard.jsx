@@ -5,7 +5,7 @@ import NewItemsCountdownTimer from "./NewItemsCountdownTimer";
 const NftCard = ({ items, authorImage }) => {
     
     return (
-        <div className="nft__item" key={items.id}>
+        <div className="nft__item author__nftCard" key={items.id}>
             <div className="author_list_pp">
                 <Link to={`/author/${items.authorId}`}>
                 <img className="lazy" src={authorImage} alt="" />

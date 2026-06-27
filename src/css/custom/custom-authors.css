@@ -1,4 +1,10 @@
-.author__nftCard--container {
+.row.authorItems__row {
     display: flex;
     flex-wrap: wrap;
+}
+
+.author__nftCard--container {
+    width: 25%;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
