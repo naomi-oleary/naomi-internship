@@ -59,7 +59,13 @@ const Author = () => {
         <section aria-label="section">
           <div className="container">
               { loading ? (
-                <Skeleton width="200px" height="42px" />
+                <div className="author__skeleton--layout">
+                  <div><Skeleton width="150px" height="150px" borderRadius="50%" /></div>
+                  <div><Skeleton width="200px" height="42px" /></div>
+                  <div><Skeleton width="80px" height="18px" /></div>
+                  <div><Skeleton width="280px" height="18px" /></div>
+                  <div><Skeleton width="280px" height="42px" borderRadius="8px" /></div>
+                </div>
               ) : (
                 <div className="row">
                   <div className="d_profile de-flex" key={authorItems.id} >

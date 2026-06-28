@@ -25,6 +25,13 @@
     width: 100%;
 }
 
+.author__skeleton--layout {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 12px;
+}
+
 @media (max-width: 576px) {
     .de_tab_content {
         max-width: 100%;
