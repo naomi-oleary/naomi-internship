@@ -10,13 +10,12 @@ const Author = () => {
   const { authorId } = useParams();
   const [authorItems, setAuthorItems] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [followers, setFollowers] = useState(null);
 
   const fetchAuthors = async () => {
     try {
       const authorItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`)
       setAuthorItems(authorItemData.data);
-      console.log(authorItemData.data)
-      console.log(authorItems?.nftCollection)
     }
     catch (error) {
       console.error("Error fetching author information:", error);
@@ -29,6 +28,20 @@ const Author = () => {
   useEffect (() => {
     fetchAuthors();
   }, [authorId])
+
+  useEffect (() => {
+    if (authorItems) {
+      setFollowers(authorItems.followers);
+    }
+  }, [authorItems])
+
+  const addFollowerButton = () => {
+    if (authorItems) {
+      const currentFollowers = Number(authorItems.followers);
+      const newFollowers = currentFollowers + 1;
+      setFollowers(String(newFollowers));
+    };
+  }
 
   return (
     <div id="wrapper">
@@ -71,8 +84,8 @@ const Author = () => {
                       </div>
                       <div className="profile_follow de-flex">
                         <div className="de-flex-col">
-                          <div className="profile_follower">{authorItems.followers} followers</div>
-                          <Link to="#" className="btn-main">
+                          <div className="profile_follower">{followers} followers</div>
+                          <Link to="#" className="btn-main" onClick={addFollowerButton}>
                             Follow
                           </Link>
                         </div>
