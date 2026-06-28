@@ -4,7 +4,7 @@ import NftCard from "./NftCard";
 import Skeleton from './Skeleton';
 
 
-const NewItemsCarousel = ({ items, loading }) => {
+const NewItemsCarousel = ({ items, authorImage, loading }) => {
     const [slidesToShow, setSlidesToShow] = useState(4);
 
     const displayItems = loading
@@ -47,7 +47,7 @@ const NewItemsCarousel = ({ items, loading }) => {
                         {loading ? (
                             <Skeleton width="100px" height="72px" />
                         ) : (
-                            <NftCard items={items} key={items.id} expiryDate={items.expiryDate} />
+                            <NftCard items={items} key={items.id} authorImage={items.authorImage} expiryDate={items.expiryDate} />
                         )}
                     </div>
                 ))}
