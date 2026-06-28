@@ -12,6 +12,7 @@
 
 .de_tab_content {
     width: 25%;
+    padding: 12px;
 }
 
 .de_tab.tab_simple {
@@ -22,4 +23,22 @@
 
 .author__nftCard {
     width: 100%;
+}
+
+@media (max-width: 576px) {
+    .de_tab_content {
+        max-width: 100%;
+    }
+
+    .de_tab.tab_simple {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 980px) {
+    .de_tab_content {
+        width: 50%;
+        padding: 12px;
+    }
 }
