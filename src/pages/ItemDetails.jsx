@@ -26,16 +26,17 @@ const ItemDetails = () => {
   }, [nftId]);
 
   if (loading) 
-    return (<div className="skeleton--layout">
-              <div><Skeleton width="480px" height="350px" borderRadius="12px" /></div>
-              <div><Skeleton width="460px" height="46px" borderRadius="10px" /></div>
-              <div><Skeleton width="160px" height="30px" borderRadius="10px" /></div>
-              <div><Skeleton width="80px" height="16px" borderRadius="10px" /></div>
-              <div><Skeleton width="50px" height="50px" borderRadius="50%" /></div>
-              <div><Skeleton width="80px" height="16px" borderRadius="10px" /></div>
-              <div><Skeleton width="50px" height="50px" borderRadius="50%" /></div>
-              <div><Skeleton width="92px" height="36px" borderRadius="10px" /></div>
-            </div>
+    return (
+      <div className="skeleton--layout">
+        <div><Skeleton width="480px" height="350px" borderRadius="12px" /></div>
+        <div><Skeleton width="460px" height="46px" borderRadius="10px" /></div>
+        <div><Skeleton width="160px" height="30px" borderRadius="10px" /></div>
+        <div><Skeleton width="80px" height="16px" borderRadius="10px" /></div>
+        <div><Skeleton width="50px" height="50px" borderRadius="50%" /></div>
+        <div><Skeleton width="80px" height="16px" borderRadius="10px" /></div>
+        <div><Skeleton width="50px" height="50px" borderRadius="50%" /></div>
+        <div><Skeleton width="92px" height="36px" borderRadius="10px" /></div>
+      </div>
   );
 
   return (
