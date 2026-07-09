@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
+    //MAIN!!
     <section
       id="section-hero"
       aria-label="section"
