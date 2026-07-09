@@ -18,22 +18,22 @@ const ExploreItems = () => {
     setFilterValue(event.target.value)
   }
 
-  const fetchExploreItems = async () => {
-    try {
-      const exploreItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filterValue}`);
-      setExploreItems(exploreItemData.data);
-    }
-    catch (error) {
-      console.error("Error fetching card data:", error);
-    }
-    finally {
-      setLoading(false);
-    }
-  }
 
-  useEffect (() => {
-    fetchExploreItems();
-  }, [filterValue])
+ useEffect(() => {
+   const fetchExploreItems = async () => {
+     try {
+       const exploreItemData = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filterValue}`);
+       setExploreItems(exploreItemData.data);
+     }
+     catch (error) {
+       console.error("Error fetching card data:", error);
+     }
+     finally {
+       setLoading(false);
+     }
+   }
+   fetchExploreItems();
+ }, [filterValue]);
 
   return (
     <>
