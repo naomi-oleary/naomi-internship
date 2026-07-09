@@ -38,7 +38,19 @@ const ExploreItems = () => {
   return (
     <>
       {loading
-        ? <Skeleton width="200px" height="40px" borderRadius="4px" />
+        ? <>
+            <Skeleton width="200px" height="40px" borderRadius="4px" />
+            <div className="skeleton__explore--layout">
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+              <Skeleton width="228px" height="442px" />
+            </div>
+        </>
         : <div>
             <select id="filter-items" defaultValue={filterValue} onChange={selectFilter}>
               <option value="">Default</option>
@@ -53,11 +65,8 @@ const ExploreItems = () => {
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
           style={{ display: "block", backgroundSize: "cover" }}
-        >
-          {loading
-            ? <Skeleton width="228px" height="400px" borderRadius="15px" />
-            :  <NftCard items={exploreItems} key={exploreItems.id} expiryDate={exploreItems.expiryDate} />
-          }
+        > 
+          <NftCard items={exploreItems} key={exploreItems.id} expiryDate={exploreItems.expiryDate} />
         </div>
       ))}
       <div className="col-md-12 text-center">

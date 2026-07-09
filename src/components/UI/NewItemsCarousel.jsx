@@ -45,7 +45,7 @@ const NewItemsCarousel = ({ items, authorImage, loading }) => {
                 {displayItems.map((items, index) => (
                     <div className="nft__card" key={index}>
                         {loading ? (
-                            <Skeleton width="100px" height="72px" />
+                            <Skeleton width="186px" height="400px" />
                         ) : (
                             <NftCard items={items} key={items.id} authorImage={items.authorImage} expiryDate={items.expiryDate} />
                         )}

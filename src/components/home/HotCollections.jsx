@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Carousel from "../UI/HotCollectionsCarousel";
 import axios from 'axios';
+import Skeleton from "../UI/Skeleton";
 
 const HotCollections = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,11 @@ const HotCollections = () => {
           </div>
           <div className="hot-collections">
             <div className="hotCollections__carousel">
-              <Carousel className="hotCollections__carousel" items={authors} key={authors.id} isLoading={loading}/>
+              {loading ? (
+                <Skeleton width="500px" height="286px" />
+              ) : (
+                <Carousel className="hotCollections__carousel" items={authors} key={authors.id} loading={loading}/>
+              )}
             </div>
           </div>
         </div>
