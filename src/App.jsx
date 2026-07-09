@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import './css/custom/custom-hotcollections.css';
 import './css/custom/custom-newItems.css';
+import './css/custom/custom-authors.css';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<Explore />} />
-        <Route path="/author" element={<Author />} />
+        <Route path="/author/:authorId" element={<Author />} />
         <Route path="/item-details/:id" element={<ItemDetails />} />
       </Routes>
       <Footer />

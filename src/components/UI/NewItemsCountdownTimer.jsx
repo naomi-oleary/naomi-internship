@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 
-const NewItemsCountdownTimer = ({ item, expiryDate }) => {
+const NewItemsCountdownTimer = ({ items, expiryDate }) => {
 
     const [timeLeft, setTimeLeft] = useState({
         hours: 0,
@@ -34,7 +34,7 @@ const NewItemsCountdownTimer = ({ item, expiryDate }) => {
         return () => clearInterval(countDown);
     }, [expiryDate]);
 
-        if (item.expiryDate === null) {
+        if (expiryDate === null) {
             return <></>
         }
         if (timeLeft.isExpired) {

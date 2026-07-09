@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import NewItemsCarousel from '../UI/NewItemsCarousel'
+import NewItemsCarousel from '../UI/NewItemsCarousel';
+import Skeleton from "../UI/Skeleton";
 
 const NewItems = () => {
 
@@ -35,7 +36,11 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <NewItemsCarousel className="newItems__carousel" items={newItems} key={newItems.id} isLoading={loading} />
+          {loading ? (
+                <Skeleton width="100px" height="72px" />
+              ) : (
+                <NewItemsCarousel className="newItems__carousel" items={newItems} key={newItems.id} expiryDate={newItems.expiryDate} loading={loading} />
+              )}
         </div>
       </div>
     </section>

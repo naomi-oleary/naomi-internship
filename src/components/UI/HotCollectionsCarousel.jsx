@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 
-const Carousel = ({ items, isLoading }) => {
+const Carousel = ({ items, loading }) => {
 
     const [slidesToShow, setSlidesToShow] = useState(4);
 
-    const displayItems = isLoading
+    const displayItems = loading
     ? new Array(4).fill({ id: '', nftId: '', nftImage: '', authorImage: '', title: '', code: '' })
      : items;
 
@@ -41,25 +41,25 @@ const Carousel = ({ items, isLoading }) => {
 
     return (
         <Slider {...sliderSettings} >
-            {displayItems.map((item, index) => (
+            {displayItems.map((items, index) => (
                 <div className="carousel-item" key={index}>
-                    <div className={`card ${isLoading ? 'skeleton-box' : ''}`} >
+                    <div className={`card ${loading ? 'skeleton-box' : ''}`} >
                         <div className="card-body">
-                            <Link to={`/item-details/${item.nftId}`} key={item.nftId} >
-                                <img src={item.nftImage} className="slide-img" alt="" />
+                            <Link to={`/item-details/${items.nftId}`} key={items.nftId} >
+                                <img src={items.nftImage} className="slide-img" alt="" />
                             </Link>
                         </div>
                         <div className="avatar">
-                            <Link to={`/authors`}>
-                                <img className="avatar--img" src={item.authorImage} alt="" />
+                            <Link to={`/author/${items.authorId}`}>
+                                <img className="avatar--img" src={items.authorImage} alt="" />
                             </Link>
                             <i className="fa fa-check"></i>
                         </div>
                         <div className="card-info">
                             <Link to="/explore">
-                                <h4>{item.title}</h4>
+                                <h4>{items.title}</h4>
                             </Link>
-                            <span>ERC-{item.code}</span>
+                            <span>ERC-{items.code}</span>
                         </div>
                     </div>
                 </div>
