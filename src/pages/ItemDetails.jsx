@@ -25,7 +25,7 @@ const ItemDetails = () => {
     fetchData()
   }, [nftId]);
 
-  if (loading) 
+  if (loading)
     return (
       <div className="skeleton--layout">
         <div><Skeleton width="480px" height="350px" borderRadius="12px" /></div>
@@ -84,7 +84,6 @@ const ItemDetails = () => {
                           </div>
                         </div>
                       </div>
-                      <div></div>
                     </div>
                     <div className="de_tab tab_simple">
                       <div className="de_tab_content">
