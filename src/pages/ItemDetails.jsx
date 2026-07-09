@@ -10,18 +10,17 @@ const ItemDetails = () => {
   const [itemDetails, setItemDetails] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`);
-      setItemDetails(response.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  
-  useEffect(() => {
+  useEffect (()=> {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`);
+        setItemDetails(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchData()
   }, [nftId]);
 
