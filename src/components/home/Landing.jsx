@@ -7,6 +7,8 @@ import 'aos/dist/aos.css';
 
 const Landing = () => {
 
+  //NAOMI MERGE
+
   AOS.init({
     duration: 800
   });
