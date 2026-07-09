@@ -104,7 +104,7 @@ const Author = () => {
                         <AuthorItems 
                           items={nftCollection} 
                           key={nftCollection.id} 
-                          loading={loading} 
+                          loading={loading}
                           authorImage={authorItems.authorImage}
                         />
                       ))}
