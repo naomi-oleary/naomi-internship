@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import Skeleton from './Skeleton';
 
 const Carousel = ({ items, loading }) => {
 
@@ -17,12 +16,12 @@ const Carousel = ({ items, loading }) => {
             else {
                 setSlidesToShow(4)
             }
+            loading = false;
         }
         
         window.addEventListener('resize', updateSlidesToShow);
         updateSlidesToShow();
 
-        loading = false;
 
         return () => {
             window.removeEventListener('resize', updateSlidesToShow)

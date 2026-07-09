@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import Skeleton from "../UI/Skeleton";
 import AOS from 'aos';
-import aos from 'aos/dist/aos.css';
 
 const TopSellers = () => {
 
