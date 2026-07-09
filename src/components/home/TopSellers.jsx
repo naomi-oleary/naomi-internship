@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import Skeleton from "../UI/Skeleton";
+import AOS from 'aos';
+import aos from 'aos/dist/aos.css';
 
 const TopSellers = () => {
+
+  AOS.init({
+    duration: 800
+  });
 
   const [loading, setLoading] = useState(true);
   const [topSellers, setTopSellers] = useState([]);
@@ -35,7 +41,7 @@ const TopSellers = () => {
                   <div className="small-border bg-color-2"></div>
                 </div>
               </div>
-              <div className="col-md-12">
+              <div data-aos="fade-in" className="col-md-12">
                 <ol className="author_list">
                   {topSellers.map((topSellers, index) => (
                     <li key={topSellers.authorId}>

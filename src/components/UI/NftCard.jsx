@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import NewItemsCountdownTimer from "./NewItemsCountdownTimer";
 import Skeleton from "./Skeleton";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const NftCard = ({ items, authorImage, loading }) => {
     
+    AOS.init({
+        duration: 800
+    });
+
     return (
         <> 
-            {loading ? (
+            { loading ? (
                 <Skeleton width="228px" height="442px" />
             ) : (
-            <div className="nft__item author__nftCard" key={items.id}>
+            <div data-aos="fade" className="nft__item author__nftCard" key={items.id}>
                     <div className="author_list_pp">
                         <Link to={`/author/${items.authorId}`}>
                         <img className="lazy" src={authorImage} alt="" />
