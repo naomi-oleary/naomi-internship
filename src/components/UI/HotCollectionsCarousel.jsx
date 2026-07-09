@@ -16,7 +16,6 @@ const Carousel = ({ items, loading }) => {
             else {
                 setSlidesToShow(4)
             }
-            loading = false;
         }
         
         window.addEventListener('resize', updateSlidesToShow);
