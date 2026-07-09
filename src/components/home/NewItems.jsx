@@ -36,11 +36,7 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {loading ? (
-                <Skeleton width="100px" height="72px" />
-              ) : (
-                <NewItemsCarousel className="newItems__carousel" items={newItems} key={newItems.id} expiryDate={newItems.expiryDate} loading={loading} />
-              )}
+            <NewItemsCarousel className="newItems__carousel" items={newItems} key={newItems.id} expiryDate={newItems.expiryDate} loading={loading} />
         </div>
       </div>
     </section>

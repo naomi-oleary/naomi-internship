@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import Skeleton from './Skeleton';
 
 const Carousel = ({ items, loading }) => {
 
     const [slidesToShow, setSlidesToShow] = useState(4);
-
-    const displayItems = loading
-    ? new Array(4).fill({ id: '', nftId: '', nftImage: '', authorImage: '', title: '', code: '' })
-     : items;
 
     useEffect(() => {
         const updateSlidesToShow = () => {
@@ -24,6 +21,8 @@ const Carousel = ({ items, loading }) => {
         
         window.addEventListener('resize', updateSlidesToShow);
         updateSlidesToShow();
+
+        loading = false;
 
         return () => {
             window.removeEventListener('resize', updateSlidesToShow)
@@ -41,9 +40,9 @@ const Carousel = ({ items, loading }) => {
 
     return (
         <Slider {...sliderSettings} >
-            {displayItems.map((items, index) => (
+            {items.map((items, index) => (
                 <div className="carousel-item" key={index}>
-                    <div className={`card ${loading ? 'skeleton-box' : ''}`} >
+                    <div className="card" >
                         <div className="card-body">
                             <Link to={`/item-details/${items.nftId}`} key={items.nftId} >
                                 <img src={items.nftImage} className="slide-img" alt="" />

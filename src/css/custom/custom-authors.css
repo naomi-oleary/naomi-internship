@@ -32,6 +32,12 @@
     padding: 12px;
 }
 
+.skeleton__explore--layout {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px;
+}
+
 @media (max-width: 576px) {
     .de_tab_content {
         max-width: 100%;
