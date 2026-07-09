@@ -42,7 +42,7 @@ const NftCard = ({ items, authorImage, loading }) => {
                                 </div>
                             </div>
                         </div>
-                        <Link to="/item-details">
+                        <Link to={`/item-details/${items.nftId}`}>
                             <img
                                 src={items.nftImage}
                                 className="lazy nft__item_preview"

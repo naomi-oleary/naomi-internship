@@ -59,7 +59,7 @@ const Author = () => {
         <section aria-label="section">
           <div className="container">
               { loading ? (
-                <div className="author__skeleton--layout">
+                <div className="skeleton--layout">
                   <div><Skeleton width="150px" height="150px" borderRadius="50%" /></div>
                   <div><Skeleton width="200px" height="42px" /></div>
                   <div><Skeleton width="80px" height="18px" /></div>
